@@ -9,7 +9,6 @@ export const getEmployees = async (
   page = 1
 ) => {
   const query = applyQueryString({ ...filters, _page: page });
-  console.log(query);
   const response = await fetch(`${API_URL}/employees${query}`);
   const data = (await response.json()) as Employee[];
   return data;
