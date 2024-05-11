@@ -1,20 +1,27 @@
-import React from 'react';
-import { ProjectRow } from './ProjectRow';
-import { useProjectsQuery } from '../api/projectsApi';
+import React from "react";
+
+import { ProjectRow } from "./ProjectRow";
+import { useProjectsQuery } from "../api/projectsApi";
 
 interface ProjectsPageProps {}
 
 export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
-  const { data, isLoading } = useProjectsQuery()
+  const { data, isLoading } = useProjectsQuery();
 
   if (!data || isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
-  return <>
-    <h1>Projects List</h1>
-    <ol>
-      {data.map(project => <li><ProjectRow project={project} /></li>)}
-    </ol>
-  </>
-}
+  return (
+    <>
+      <h1>Projects List</h1>
+      <ol>
+        {data.map((project) => (
+          <li key={project.id}>
+            <ProjectRow project={project} />
+          </li>
+        ))}
+      </ol>
+    </>
+  );
+};

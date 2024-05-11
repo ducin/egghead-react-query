@@ -1,29 +1,19 @@
-// import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-import { Link, Outlet } from 'react-router-dom'
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import { Navigation } from "./Navigation";
 
 function App() {
   return (
     <>
       <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to={`projects`}>Projects</Link>
-            </li>
-            <li>
-              <Link to={`employees`}>Employees</Link>
-            </li>
-          </ul>
-        </nav>
+        <Navigation />
       </header>
       <section>
         <Outlet />
       </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
