@@ -1,16 +1,12 @@
 import React from "react";
 
 import { ProjectRow } from "./ProjectRow";
-import { useProjectsQuery } from "../api/projectsApi";
+import { Project } from "../api/dto";
 
 interface ProjectsPageProps {}
 
 export const ProjectsPage: React.FC<ProjectsPageProps> = () => {
-  const { data, isLoading } = useProjectsQuery();
-
-  if (!data || isLoading) {
-    return <div>Loading...</div>;
-  }
+  const data: Project[] = [];
 
   return (
     <>

@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { useEmployeeByIdQuery } from "../api/employeesApi";
 import CurrencyFormat from "react-currency-format";
+import { Employee } from "../api/dto";
 
 interface EmployeeDetailsProps {}
 
@@ -12,9 +12,8 @@ export const EmployeeDetails: React.FC<EmployeeDetailsProps> = () => {
     throw new Error("employeeId is required");
   }
 
-  const { data: employee, isLoading } = useEmployeeByIdQuery(
-    parseInt(employeeId)
-  );
+  let employee: Employee | undefined;
+  const isLoading = true;
 
   if (!employee || isLoading) {
     return <div>Loading...</div>;

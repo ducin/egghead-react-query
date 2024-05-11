@@ -2,10 +2,6 @@ import React, { useCallback } from "react";
 
 import { Employee } from "../api/dto";
 import { EmployeeRow } from "./EmployeeRow";
-import {
-  useDeleteEmployeeMutation,
-  useEmployeeRaiseMutation,
-} from "../api/employeesApi";
 
 interface EmployeeListingProps {
   employees: Employee[];
@@ -14,28 +10,13 @@ interface EmployeeListingProps {
 export const EmployeeListing: React.FC<EmployeeListingProps> = (props) => {
   const { employees } = props;
 
-  const deleteEmployeeMutation = useDeleteEmployeeMutation();
+  const onEmployeeDismiss = useCallback((employee: Employee) => {
+    console.log("dismiss employee", employee);
+  }, []);
 
-  const onEmployeeDismiss = useCallback(
-    (employee: Employee) => {
-      console.log("dismiss employee", employee);
-      deleteEmployeeMutation.mutate(employee.id);
-    },
-    [deleteEmployeeMutation]
-  );
-
-  const employeeRaiseMutation = useEmployeeRaiseMutation();
-
-  const onEmployeeRaise = useCallback(
-    (employee: Employee) => {
-      console.log("give raise to employee", employee);
-      employeeRaiseMutation.mutate({
-        id: employee.id,
-        salary: employee.salary + 1000,
-      });
-    },
-    [employeeRaiseMutation]
-  );
+  const onEmployeeRaise = useCallback((employee: Employee) => {
+    console.log("give raise to employee", employee);
+  }, []);
 
   return (
     <>
