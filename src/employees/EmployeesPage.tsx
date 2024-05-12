@@ -1,12 +1,13 @@
 import React from "react";
 
 import { EmployeeListing } from "./EmployeeListing";
-import { useEmployeesQuery } from "../api/employeesQueries";
+import { employeesQuery } from "../api/employeesQueries";
+import { useQuery } from "@tanstack/react-query";
 
 interface EmployeesPageProps {}
 
 export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
-  const { data, isPending, error } = useEmployeesQuery();
+  const { data, isPending, error } = useQuery(employeesQuery);
 
   if (isPending) {
     return <span>loading...</span>;
