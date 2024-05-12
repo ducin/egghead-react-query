@@ -3,6 +3,7 @@ import { BudgetTable } from "./BudgetTable";
 import { Benefit, Employee } from "../api/dto";
 import { useQuery } from "@tanstack/react-query";
 import { employeesQuery } from "../api/employeesQueries";
+import { benefitsQuery } from "../api/benefitsQueries";
 
 function salariesCosts(employees: Employee[]) {
   const monthly = employees.reduce((total, e) => total + e.salary, 0);
@@ -19,13 +20,11 @@ function benefitCosts(benefits: Benefit[]) {
 interface BudgetsPageProps {}
 
 export const BudgetsPage: React.FC<BudgetsPageProps> = () => {
-  const { data } = useQuery(employeesQuery);
+  const { data: dataEmployees } = useQuery(employeesQuery);
+  const salaries = dataEmployees && salariesCosts(dataEmployees);
 
-  const salaries = data && salariesCosts(data);
-  // const salaries = { monthly: 0, yearly: 0 };
-
-  const benefits = benefitCosts([]);
-  // const benefits = { monthly: 0, yearly: 0 };
+  const { data: benefitsData } = useQuery(benefitsQuery);
+  const benefits = benefitsData && benefitCosts(benefitsData);
 
   return (
     <>
