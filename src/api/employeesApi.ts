@@ -1,3 +1,5 @@
+// import ky from "ky";
+// import axios from "axios";
 import { API_URL } from "../env";
 import { Employee } from "./dto";
 import { applyQueryString } from "./queryString";
@@ -12,6 +14,15 @@ export const getEmployees = async (
   const response = await fetch(`${API_URL}/employees${query}`);
   const data = (await response.json()) as Employee[];
   return data;
+
+  // axios:
+  // const response = await axios.get<Employee[]>(`${API_URL}/employees${query}`);
+  // return response.data;
+
+  // ky:
+  // const response = await ky.get(`${API_URL}/employees${query}`);
+  // const data = (await response.json()) as Employee[];
+  // return data;
 };
 
 export const getEmployeeById = async (id: Employee["id"]) => {
