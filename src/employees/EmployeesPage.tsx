@@ -7,7 +7,7 @@ import { getEmployees } from "../api/employeesApi";
 interface EmployeesPageProps {}
 
 export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
-  const { data, isPending, error } = useQuery({
+  const { data, isPending, isFetching, isLoading, error } = useQuery({
     queryKey: ["employees", "list"],
     queryFn: async () => {
       return getEmployees();
@@ -15,7 +15,7 @@ export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
   });
 
   if (isPending) {
-    return <span>loading...</span>;
+    return <span>there is no data to be displayed...</span>;
   }
 
   if (error) {
@@ -25,6 +25,7 @@ export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
   return (
     <>
       <h1>Employees List</h1>
+      {isFetching && <span>loading...</span>}
       <EmployeeListing employees={data} />
     </>
   );
