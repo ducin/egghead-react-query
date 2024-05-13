@@ -1,5 +1,6 @@
 import React from "react";
-import { Geo, Nationality } from "../api/dto";
+import { useGeoQuery } from "../api/geoQueries";
+import { Nationality } from "../api/dto";
 
 interface NationalityDropdownProps {
   onChange: (nationality?: Nationality) => void;
@@ -10,8 +11,7 @@ export const NationalityDropdown: React.FC<NationalityDropdownProps> = (
 ) => {
   const { onChange } = props;
 
-  let data: Geo | undefined;
-  const isLoading = true;
+  const { data, isLoading } = useGeoQuery();
 
   if (!data || isLoading) {
     return <div>Loading...</div>;

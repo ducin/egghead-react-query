@@ -1,21 +1,23 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 
 import { EmployeeListing } from "./EmployeeListing";
 import { employeesQuery } from "../api/employeesQueries";
 import { useQuery } from "@tanstack/react-query";
+import { Nationality } from "../api/dto";
+import { NationalityDropdown } from "./NationalityDropdown";
 
 interface EmployeesPageProps {}
 
 export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
-  const { data, isPending, isFetching, error } = useQuery(employeesQuery);
-
   const [searchName, setSearchName] = useState("");
+  const [searchNationality, setSearchNationality] = useState<Nationality>();
 
-  const clientSideFilteredEmployee = useMemo(() => {
-    return data?.filter((e) =>
-      e.lastName.toLowerCase().includes(searchName.toLowerCase())
-    );
-  }, [data, searchName]);
+  const { data, isPending, isFetching, error } = useQuery(
+    employeesQuery({
+      lastName: searchName,
+      nationality: searchNationality,
+    })
+  );
 
   if (isPending) {
     return <span>there is no data to be displayed...</span>;
@@ -34,11 +36,10 @@ export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
         value={searchName}
         onChange={(e) => setSearchName(e.target.value)}
       />
+      <NationalityDropdown onChange={setSearchNationality} />
       {isFetching && <span>loading...</span>}
 
-      {clientSideFilteredEmployee && (
-        <EmployeeListing employees={clientSideFilteredEmployee} />
-      )}
+      <EmployeeListing employees={data} />
     </>
   );
 };

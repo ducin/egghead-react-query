@@ -1,15 +1,15 @@
-import { useQuery, queryOptions } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
 import { getEmployees } from "./employeesApi";
+import { Employee } from "./dto";
 
-export const employeesQuery = queryOptions({
-  queryKey: ["employees", "list"],
-  queryFn: async () => {
-    return getEmployees();
-  },
-  staleTime: 1000 * 15,
-  gcTime: 1000 * 3,
-});
+type EmployeeQueryParams = Partial<Pick<Employee, "nationality" | "lastName">>;
 
-export const useEmployeesQuery = () => {
-  return useQuery(employeesQuery);
-};
+export const employeesQuery = (params: EmployeeQueryParams) =>
+  queryOptions({
+    queryKey: ["employees", "list", params],
+    queryFn: async () => {
+      return getEmployees(params);
+    },
+    staleTime: 1000 * 15,
+    gcTime: 1000 * 3,
+  });
