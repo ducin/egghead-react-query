@@ -19,14 +19,6 @@ export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
     })
   );
 
-  if (isPending) {
-    return <span>there is no data to be displayed...</span>;
-  }
-
-  if (error) {
-    return <span>{error.message}</span>;
-  }
-
   return (
     <>
       <h1>Employees List</h1>
@@ -39,7 +31,13 @@ export const EmployeesPage: React.FC<EmployeesPageProps> = () => {
       <NationalityDropdown onChange={setSearchNationality} />
       {isFetching && <span>loading...</span>}
 
-      <EmployeeListing employees={data} />
+      {isPending ? (
+        <span>there is no data to be displayed...</span>
+      ) : error ? (
+        <span>{error.message}</span>
+      ) : (
+        <EmployeeListing employees={data} />
+      )}
     </>
   );
 };
