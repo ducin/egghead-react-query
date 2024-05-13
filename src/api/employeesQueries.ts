@@ -7,6 +7,7 @@ export const employeesQuery = queryOptions({
     return getEmployees();
   },
   staleTime: 1000 * 15,
+  gcTime: 1000 * 3,
 });
 
 export const useEmployeesQuery = () => {
