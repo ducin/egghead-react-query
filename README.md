@@ -2,7 +2,9 @@
 
 👉 https://egghead.io/courses/simplify-state-management-with-react-query-0d92fbf3
 
-use [git branches](https://github.com/ducin/egghead-react-query/branches) to navigate to certain lessons
+use [git branches](https://github.com/ducin/egghead-react-query/branches) to navigate to certain lessons.
+
+See my [other Egghead Courses](https://egghead.io/q/resources-by-tomasz-ducin).
 
 ## API
 
