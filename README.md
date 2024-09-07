@@ -4,7 +4,7 @@
 
 use [git branches](https://github.com/ducin/egghead-react-query/branches) to navigate to certain lessons.
 
-See my [other Egghead Courses](https://egghead.io/q/resources-by-tomasz-ducin).
+📚 See my [other Egghead Courses](https://egghead.io/q/resources-by-tomasz-ducin).
 
 ## API
 
